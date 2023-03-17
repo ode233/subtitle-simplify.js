@@ -1,5 +1,5 @@
 import { createStreamFromString } from '../test-utils'
-import { parse, map, NodeList, Node } from '../src'
+import { map, NodeList, Node } from '../src'
 
 test('map nodes', done => {
   const stream = createStreamFromString(`
@@ -38,7 +38,6 @@ Welcome to the Planet.\n`)
   expect.assertions(2)
 
   stream
-    .pipe(parse())
     .pipe(map(callback))
     .on('data', (chunk: Node) => {
       buffer.push(chunk)

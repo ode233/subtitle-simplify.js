@@ -1,5 +1,5 @@
 import { createStreamFromString, pipeline, streamToString } from '../test-utils'
-import { filter, parse, stringify } from '../src'
+import { filter, stringify } from '../src'
 
 test('filter nodes', async () => {
   const stream = createStreamFromString(`
@@ -16,11 +16,9 @@ Hi.
 Welcome to the Planet.\n`)
 
   const data = await pipeline(
-    stream
-      .pipe(parse())
-      .pipe(
-        filter(node => !(node.type === 'cue' && node.data.text.includes('𝅘𝅥𝅮')))
-      )
+    stream.pipe(
+      filter(node => !(node.type === 'cue' && node.data.text.includes('𝅘𝅥𝅮')))
+    )
   )
 
   expect(data).toMatchInlineSnapshot(`
@@ -61,7 +59,6 @@ Welcome to the Planet.\n`)
 
   const data = await streamToString(
     stream
-      .pipe(parse())
       .pipe(
         filter(node => !(node.type === 'cue' && node.data.text.includes('𝅘𝅥𝅮')))
       )
