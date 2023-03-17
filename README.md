@@ -1,4 +1,4 @@
-# subtitle
+# subtitle-simplify
 > Simplified version of `subtitle.js`  
 > Remove `multipipe` dependency and related functions to be compatible with Reactive Native
 
